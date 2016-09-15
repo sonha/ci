@@ -23,6 +23,34 @@ class User extends CI_Controller {
     	// $this->load->view('layouts/layout_bottom');
     }
 
+    function create() {
+		$data['title'] = 'List User Page';
+    	// $data['all_user'] = $this->User_model->getAll()
+		$this->load->helper(array('form', 'url'));
+        $this->load->library('form_validation');
+
+        $this->form_validation->set_rules('username', 'User Name', 'required|min_length[4]|max_length[25]');
+        $this->form_validation->set_rules('email', 'Email Address', 'required|valid_email|min_length[4]|max_length[25]');
+        $this->form_validation->set_rules('age', 'Age', 'required|numeric');
+        $this->form_validation->set_rules('password', 'Mat khau', 'required|min_length[8]|max_length[12]');
+
+		if($this->form_validation->run() == FALSE) {
+			$this->load->view('layouts/part_top');
+			$this->load->view('user/create');
+	    	$this->load->view('layouts/part_bottom');
+		} else {
+			$data = array(
+                    'username' => $_POST['username'], // $_POST['username']
+                    'email' => $_POST['email'],
+                    'age' => $_POST['age'],
+                    'password' => $this->input->post('password'),
+            );
+
+			$this->User_model->insert_data($data);
+			redirect('/user/test2', 'refresh');
+		}
+    }
+
 
 	public function index()
 	{

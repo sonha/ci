@@ -516,7 +516,7 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Data Table With Full Features</h3>
+              <a href="<?php echo base_url().'user/create';?>"><button type="submit" class="btn btn-primary">Create User</button></a>
             </div>
             <!-- /.box-header -->
             <div class="box-body">

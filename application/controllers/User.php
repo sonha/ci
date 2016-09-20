@@ -17,10 +17,7 @@ class User extends CI_Controller {
     function test2() {
     	$data['all_user'] = $this->User_model->getAll();
 		$data['title'] = 'List User Page';
-		// var_dump($data['all_user']);die;
-    	// $this->load->view('layouts/layout_top');
     	$this->load->view('user/list_user2', $data);
-    	// $this->load->view('layouts/layout_bottom');
     }
 
     function create() {

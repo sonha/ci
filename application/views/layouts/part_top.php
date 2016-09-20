@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Data Tables</title>
+   <link rel="shortcut icon" href="http://php.net/favicon.ico">
+  <title><?php echo isset($title) ? $title : 'No Name';?></title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -336,6 +337,18 @@
         </li>
         <li class="treeview">
           <a href="#">
+            <i class="fa fa-map"></i> <span>Category</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<?php echo base_url().'category/create';?>"><i class="fa fa-hand-scissors-o"></i> Create Category</a></li>
+            <li><a href="<?php echo base_url().'category/index';?>"><i class="fa fa-firefox"></i> List Category</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
             <i class="fa fa-files-o"></i>
             <span>Layout Options</span>
             <span class="pull-right-container">
@@ -500,7 +513,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Data Tables
+        <?php echo isset($title) ? $title : 'No Name';?>
         <small>advanced tables</small>
       </h1>
       <ol class="breadcrumb">

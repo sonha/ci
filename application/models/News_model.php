@@ -12,6 +12,11 @@ class News_model extends CI_Model {
 		$this->db->insert('news', $data);
 	}
 
+    public function update($id=0, $data) {
+        $this->db->where('id',$id);
+        return $this->db->update('news',$data);
+    }
+
 	function getNewsById($id) {
         $this->db->where('id', $id);
         $query = $this->db->get('news');

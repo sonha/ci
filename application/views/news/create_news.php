@@ -24,7 +24,8 @@
       <!-- Username -->
 	      <label class="control-label"  for="username">Content</label>
 	      <div class="controls">
-	        <textarea class="form-control" name="content" rows="3"><?php echo set_value('content'); ?></textarea>
+	        <?php echo $editor;?>
+			<textarea></textarea>  
 	        <p class="help-block">Content can contain any letters or numbers, without spaces</p>
 	      </div>
     	</div>

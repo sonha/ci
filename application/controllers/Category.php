@@ -61,7 +61,7 @@ class Category extends CI_Controller {
                     'description' => $_POST['description']
             );
 
-			$this->Category_model->update($id);
+			$this->Category_model->update($id, $data);
 			redirect('/category/index', 'refresh');
 		}
     }

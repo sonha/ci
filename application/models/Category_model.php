@@ -11,19 +11,14 @@ class Category_model extends CI_Model {
     	return $data;
     }
 
-   public function getCategoryById($id) {
+    public function getCategoryById($id) {
         $this->db->where('id', $id);
         $query = $this->db->get('category');
         $data = $query->row();
         return $data;
     }
 
-    public function update($id=0) {
-        $data = array(
-            'category_name' => $this->input->post('category_name'),
-            'description' => $this->input->post('description')
-        );
-        // var_dump( $data);die;
+    public function update($id=0, $data) {
         $this->db->where('id',$id);
         return $this->db->update('category',$data);
     }

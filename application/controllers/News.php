@@ -64,7 +64,6 @@ class News extends CI_Controller {
                     'content' => $_POST['content'],
                     'author' => $_POST['author'],
             );
-
 			$this->News_model->update($id, $data);
 			redirect('/news/index', 'refresh');
 		}

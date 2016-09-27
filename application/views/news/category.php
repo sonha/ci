@@ -19,12 +19,9 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
-                <li class="active"><a href="<?php echo base_url().'news/category/1'?>">Event</a></li>
-                <li><a href="<?php echo base_url().'news/category/2'?>">Social</a></li>
-                <li><a href="<?php echo base_url().'news/category/3'?>">Sports</a></li>
-                <li><a href="<?php echo base_url().'news/category/4'?>">Education</a></li>
-                <li><a href="<?php echo base_url().'news/category/5'?>">Love&Care</a></li>
-                <li><a href="<?php echo base_url().'news/category/6'?>">Thể Thao 12121212</a></li>
+              <?php foreach($all_category as $key => $value) { ?>
+                <li class="active"><a href="<?php echo base_url().'news/category/'.$value->id;?>"><?php echo $value->category_name;?></a></li>
+              <?php } ?>
               </ul>
             </div>
           </div>

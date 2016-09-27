@@ -48,6 +48,16 @@
                   </div>
                   </div>
                 </div>
+                <div class="form-group">
+                <div class="row">
+                  <div class="col-md-2">
+                    <label for="exampleInputEmail1">Category ID</label>
+                  </div>
+                  <div class="col-md-10">
+                    <input type="text" name="category_id" value="<?php echo set_value('category_id'); ?>" class="form-control" id="exampleInputEmail1" placeholder="Enter category_id">
+                  </div>
+                  </div>
+                </div>
               </div>
               <!-- /.box-body -->
 

@@ -3,7 +3,14 @@ class News_model extends CI_Model {
 
     function get_all_news()
     {
-        $query = $this->db->get('news', 10);
+        $query = $this->db->get('news');
+        $data = $query->result();
+        return $data;
+    }
+    function get_news_by_category($id)
+    {
+        $this->db->where('category_id',$id);
+        $query = $this->db->get('news');
         $data = $query->result();
         return $data;
     }

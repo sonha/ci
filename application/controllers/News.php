@@ -8,6 +8,7 @@ class News extends CI_Controller {
         parent::__construct();
         $this->load->helper("url");
         $this->load->model('News_model');
+        $this->load->model('Category_model');
     }
 
 	public function index()
@@ -17,6 +18,30 @@ class News extends CI_Controller {
 		$this->load->view('news/list_news', $data);
 	}
 
+	function to_slug($str) {
+    $str = trim(mb_strtolower($str));
+    $str = preg_replace('/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/', 'a', $str);
+    $str = preg_replace('/(è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ)/', 'e', $str);
+    $str = preg_replace('/(ì|í|ị|ỉ|ĩ)/', 'i', $str);
+    $str = preg_replace('/(ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ)/', 'o', $str);
+    $str = preg_replace('/(ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ)/', 'u', $str);
+    $str = preg_replace('/(ỳ|ý|ỵ|ỷ|ỹ)/', 'y', $str);
+    $str = preg_replace('/(đ)/', 'd', $str);
+    $str = preg_replace('/[^a-z0-9-\s]/', '', $str);
+    $str = preg_replace('/([\s]+)/', '-', $str);
+    return $str;
+	}
+
+	public function category($id)
+	{
+		$data['all_news'] = $this->News_model->get_news_by_category($id);
+		$data['all_category'] = $this->Category_model->getAll();
+		// var_dump($data['all_category']);die;
+		$data['title'] = 'List News';
+		$this->load->view('news/category', $data);
+	}
+
+
 	public function create() {
 		$this->load->helper(array('form', 'url'));
         $this->load->library('form_validation');
@@ -24,6 +49,7 @@ class News extends CI_Controller {
         $this->form_validation->set_rules('title', 'Title', 'required|min_length[4]|max_length[100]');
         $this->form_validation->set_rules('content', 'Noi Dung', 'required|min_length[4]');
         $this->form_validation->set_rules('author', 'Tac Gia', 'required');
+        $this->form_validation->set_rules('category_id', 'Chuyen muc', 'required');
 
 		if($this->form_validation->run() == FALSE) {
 			// $this->load->view('news/create_news', $data);
@@ -31,12 +57,16 @@ class News extends CI_Controller {
 			$this->load->view('news/create');
 	    	$this->load->view('layouts/part_bottom');
 		} else {
-			// var_dump($_POST);die;
 			$data = array(
                     'title' => $_POST['title'], 
                     'content' => $_POST['content'],
                     'author' => $_POST['author'],
+                    'category_id' => $_POST['category_id'],
             );
+
+
+            $slug = $this->to_slug($_POST['title']);
+            var_dump( $slug);die;
 
 			$this->News_model->insert_data($data);
 			redirect('/news/index', 'refresh');

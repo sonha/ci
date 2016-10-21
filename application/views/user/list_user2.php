@@ -520,6 +520,15 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
+            <?php if($this->session->flashdata('success_message')) { ?>
+              <div class="alert alert-success" role="alert"><?php echo $this->session->flashdata('success_message');?></div>
+            <?php } ?>
+            <?php if($this->session->flashdata('delete_message')) { ?>
+              <div class="alert alert-success" role="alert"><?php echo $this->session->flashdata('delete_message');?></div>
+            <?php } ?>
+            <?php if($this->session->flashdata('update_message')) { ?>
+              <div class="alert alert-success" role="alert"><?php echo $this->session->flashdata('update_message');?></div>
+            <?php } ?>
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>

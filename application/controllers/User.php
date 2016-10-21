@@ -44,6 +44,9 @@ class User extends CI_Controller {
             );
 
 			$this->User_model->insert_data($data);
+
+			$this->session->set_flashdata('success_message', 'Well done! You successfully read this important alert message.');
+
 			redirect('/user/test2', 'refresh');
 		}
     }
@@ -65,7 +68,8 @@ class User extends CI_Controller {
 
 	public function delete($id) {
 		$this->User_model->deleteUser($id);
-		redirect('/user/list_user', 'refresh');
+		$this->session->set_flashdata('delete_message', 'Delete successfully !');
+		redirect('/user/test2', 'refresh');
 	}
 
 	public function hello()
@@ -134,7 +138,8 @@ class User extends CI_Controller {
 			$this->load->view('user/update_user', $data);
 		} else {
 			$this->User_model->update_user($user_id);
-			redirect('/user/list_user', 'refresh');
+			$this->session->set_flashdata('update_message', 'update successfully !');
+			redirect('/user/test2', 'refresh');
 		}
 	}
 }

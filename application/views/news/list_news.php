@@ -41,6 +41,7 @@
         </div>
         <?php } ?>
       </div>
+      <?php echo $pagination;?>
       <hr>
       <footer>
         <p>© 2016 Company, Inc.</p>

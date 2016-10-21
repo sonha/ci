@@ -13,7 +13,44 @@ class News extends CI_Controller {
 
 	public function index()
 	{
-		$data['all_news'] = $this->News_model->get_all_news();
+		$data['total_news'] = $this->News_model->getTotalNews();
+		$this->load->library('pagination');
+		$perpage	=  3; /* Số books hiển thị trên một page*/
+		$config['total_rows']  =  $data['total_news'];
+		$config['per_page']  =  $perpage;
+		$config['num_links']	=  5;
+		$config['use_page_numbers'] = TRUE;//LUU Y :  De hien thi trang chu ko phai offset
+
+  		$config['full_tag_open'] = '<ul class="pagination">';
+        $config['full_tag_close'] = '</ul>';
+        $config['first_link'] = false;
+        $config['last_link'] = false;
+        $config['first_tag_open'] = '<li>';
+        $config['first_tag_close'] = '</li>';
+        $config['prev_link'] = '&laquo';
+        $config['prev_tag_open'] = '<li class="prev">';
+        $config['prev_tag_close'] = '</li>';
+        $config['next_link'] = '&raquo';
+        $config['next_tag_open'] = '<li>';
+        $config['next_tag_close'] = '</li>';
+        $config['last_tag_open'] = '<li>';
+        $config['last_tag_close'] = '</li>';
+        $config['cur_tag_open'] = '<li class="active"><a href="#">';
+        $config['cur_tag_close'] = '</a></li>';
+        $config['num_tag_open'] = '<li>';
+        $config['num_tag_close'] = '</li>';
+		$config['base_url'] =  base_url().'/news/';
+		$config['uri_segment']	 =  2;
+                # Khởi tạo phân trang
+		$this->pagination->initialize($config); 
+                # Tạo link phân trang
+		$pagination =  $this->pagination->create_links();
+
+		$offset  =  ($this->uri->segment(2)=='') ? 0 : $this->uri->segment(2); 
+		// var_dump($offset );die;
+
+		$data['all_news'] =  $this->News_model->getNews($perpage, $offset);
+		$data['pagination'] = $pagination;
 		$data['title'] = 'List News';
 		$this->load->view('news/list_news', $data);
 	}

@@ -52,3 +52,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+// Điều hướng cho việc phân trang 
+$route['news'] = "news/index"; 
+$route['home'] = "home/index"; 
+$route['news/([0-9\-]+)'] = "news/index/$1";
+$route['home/([0-9\-]+)'] = "home/index/$1";

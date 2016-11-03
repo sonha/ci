@@ -19,7 +19,9 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
-		$data['total_news'] = $this->News_model->getTotalNews();
+
+    	$keyword = isset($_POST['search_name']) ? $_POST['search_name'] : '';
+		$data['total_news'] = $this->News_model->getTotalNews($keyword);
 		$data['popular'] = $this->News_model->getPopularPost();
 		$this->load->library('pagination');
 		$perpage	=  10; /* Số books hiển thị trên một page*/
@@ -48,14 +50,27 @@ class Home extends CI_Controller {
         $config['num_tag_close'] = '</li>';
 		$config['base_url'] =  base_url().'/home/';
 		$config['uri_segment']	 =  2;
+
+		// if(isset($_POST['submit'])) {
+  //       	var_dump($_POST);die;
+  //   	}
+
+
+
                 # Khởi tạo phân trang
 		$this->pagination->initialize($config); 
                 # Tạo link phân trang
 		$pagination =  $this->pagination->create_links();
 
-		$offset  =  ($this->uri->segment(2)=='') ? 0 : $this->uri->segment(2); 
+		// $offset  =  ($this->uri->segment(2)=='') ? 0 : $this->uri->segment(2); 
+		if($this->uri->segment(3)) {
+          $offset = ($this->uri->segment(3)-1)*$perpage;
+		} else {
+          $offset = 0;
+      	}
 
-		$data['all_news'] =  $this->News_model->getNews($perpage, $offset);
+		$data['all_news'] =  $this->News_model->getNews($perpage, $offset, $keyword);
+		// var_dump($data['all_news'] );die;
 		// var_dump($data['all_news'] );die;
 		$data['pagination'] = $pagination;
 		$data['title'] = 'List News';

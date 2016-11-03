@@ -1,5 +1,5 @@
 <section class="content">
-<?php echo form_open('news/create'); ?>
+<?php echo form_open_multipart('news/create'); ?>
       <div class="row">
         <!-- left column -->
         <div class="col-md-12">
@@ -21,6 +21,16 @@
                   </div>
                   <div class="col-md-10">
                   <input type="text" name="title" value="<?php echo set_value('title'); ?>" class="form-control" id="exampleInputEmail1" placeholder="Enter title">
+                  </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-2">
+                  <label for="exampleInputEmail1">Image</label>
+                  </div>
+                  <div class="col-md-10">
+                  <input type='file' name='userfile' size='20' />
                   </div>
                   </div>
                 </div>

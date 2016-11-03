@@ -88,12 +88,26 @@ class News extends CI_Controller {
         $this->form_validation->set_rules('author', 'Tac Gia', 'required');
         $this->form_validation->set_rules('category_id', 'Chuyen muc', 'required');
 
+
+
 		if($this->form_validation->run() == FALSE) {
 			// $this->load->view('news/create_news', $data);
 			$this->load->view('layouts/part_top', $data);
 			$this->load->view('news/create');
 	    	$this->load->view('layouts/part_bottom');
 		} else {
+
+		$config = array(
+			'upload_path' => "./assets/uploads/",
+			'allowed_types' => "gif|jpg|png|jpeg|pdf",
+			'overwrite' => TRUE,
+			'max_size' => "2048000", // Can be set to particular file size , here it is 2 MB(2048 Kb)
+			'max_height' => "768",
+			'max_width' => "1024"
+		);
+
+		$this->load->library('upload', $config);
+		$this->upload->do_upload();
 			$data = array(
                     'title' => $_POST['title'], 
                     'content' => $_POST['content'],
@@ -103,7 +117,7 @@ class News extends CI_Controller {
 
 
             $slug = $this->to_slug($_POST['title']);
-            var_dump( $slug);die;
+            // var_dump( $slug);die;
 
 			$this->News_model->insert_data($data);
 			redirect('/news/index', 'refresh');

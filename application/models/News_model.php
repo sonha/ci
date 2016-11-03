@@ -8,13 +8,22 @@ class News_model extends CI_Model {
         return $data;
     }
 
-    public function getTotalNews()
-    {
-        return $this->db->select()->get('news')->num_rows();
+    public function getTotalNews($keyword = null)
+    {   
+        if(!empty($keyword)) {
+            return $this->db->select()
+                        ->like('title', $keyword)
+                        ->get('news')->num_rows();
+        } else {
+            return $this->db->select()->get('news')->num_rows();
+        }
+       
     }
 
-    function getNews( $perpage, $offset ){
+    function getNews( $perpage, $offset, $keyword = null ){
+        // var_dump($keyword);die;
         $news = $this->db->select()
+                        ->like('title', $keyword)
                         ->limit($perpage, $offset)
                         ->order_by('title', 'ASC')
                         ->get('news')

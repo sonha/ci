@@ -123,8 +123,9 @@
     </div>
     <aside class="span4">
         <div class="widget search">
-            <form>
-                <input type="text" class="input-block-level" placeholder="Search">
+            <form action="" method="post">
+                <input type="text" class="input-block-level" name="search_name" placeholder="Search">
+                 <input type="submit" name="submit" style="display:none" />
             </form>
         </div>
         <!-- /.search -->
@@ -379,13 +380,13 @@
 <!--/Footer-->
 
 <!--  Login form -->
-<div class="modal hide fade in" id="loginForm" aria-hidden="false">
+<!-- <div class="modal hide fade in" id="loginForm" aria-hidden="false">
     <div class="modal-header">
         <i class="icon-remove" data-dismiss="modal" aria-hidden="true"></i>
         <h4>Login Form</h4>
     </div>
     <!--Modal Body-->
-    <div class="modal-body">
+    <!-- <div class="modal-body">
         <form class="form-inline" action="index.html" method="post" id="form-login">
             <input type="text" class="input-small" placeholder="Email">
             <input type="password" class="input-small" placeholder="Password">
@@ -395,14 +396,27 @@
             <button type="submit" class="btn btn-primary">Sign in</button>
         </form>
         <a href="#">Forgot your password?</a>
-    </div>
+    </div> -->
     <!--/Modal Body-->
-</div>
+</div> -->
 <!--  /Login form -->
 
 <script src="<?php echo base_url();?>assets/nova/js/vendor/jquery-1.9.1.min.js"></script>
 <script src="<?php echo base_url();?>assets/nova/js/vendor/bootstrap.min.js"></script>
 <script src="<?php echo base_url();?>assets/nova/js/main.js"></script>
+<script type="text/javascript">
+$(function() {
+    $('form').each(function() {
+        $(this).find('input').keypress(function(e) {
+            // Enter pressed?
+            if(e.which == 10 || e.which == 13) {
+                this.form.submit();
+            }
+        });
 
+       //$(this).find('input[type=submit]').hide();
+    });
+});
+</script>
 </body>
 </html>
